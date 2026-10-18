@@ -1,0 +1,422 @@
+{
+  "dshRoot": "<dsh-install>",
+  "A_themeBundle": {
+    "source": "dsh-client-ui-theme/lib/client.js（行内 CSS 绑定）",
+    "bindings": [
+      {
+        "binding": "base_css_default",
+        "offset": 48051,
+        "cssLength": 860,
+        "tokens": 10
+      },
+      {
+        "binding": "corner_shape_css_default",
+        "offset": 49117,
+        "cssLength": 141,
+        "tokens": 1
+      },
+      {
+        "binding": "design_platform_css_default",
+        "offset": 49451,
+        "cssLength": 19081,
+        "tokens": 190
+      },
+      {
+        "binding": "focus_css_default",
+        "offset": 68718,
+        "cssLength": 298,
+        "tokens": 2
+      },
+      {
+        "binding": "onboarding_css_default",
+        "offset": 69197,
+        "cssLength": 869,
+        "tokens": 7
+      },
+      {
+        "binding": "gradient_shadow_text_css_default",
+        "offset": 71284,
+        "cssLength": 11719,
+        "tokens": 193
+      }
+    ],
+    "unionDeclared": 403,
+    "byPrefix": {
+      "font": 182,
+      "alias": 107,
+      "static": 77,
+      "specific": 11,
+      "radius": 6,
+      "elevation": 5,
+      "shadow": 4,
+      "gradient": 3,
+      "menu": 2,
+      "focus": 2,
+      "linear": 2,
+      "corner": 1,
+      "mask": 1
+    },
+    "lightDeclared": 403,
+    "darkDeclared": 196,
+    "darkOnlyTokens": []
+  },
+  "B_inspectDirectory": {
+    "source": "BUILTIN_INSPECT_TOKENS（exportInspectTokens 的静态种子）",
+    "count": 14,
+    "names": [
+      "--dsw-alias-bg-base",
+      "--dsw-alias-bg-layer-1",
+      "--dsw-alias-bg-layer-2",
+      "--dsw-alias-bg-overlay",
+      "--dsw-alias-border-l1",
+      "--dsw-alias-border-l2",
+      "--dsw-alias-brand-primary",
+      "--dsw-alias-label-primary",
+      "--dsw-alias-label-secondary",
+      "--dsw-alias-state-error-primary",
+      "--dsw-alias-state-idle-primary",
+      "--dsw-alias-state-success-primary",
+      "--dsw-alias-state-warn-primary",
+      "--dsw-specific-sidebar-fill"
+    ],
+    "byPrefix": {
+      "alias": 13,
+      "specific": 1
+    },
+    "requiresLightAndDark": 14,
+    "inDirectoryNotInStylesheet": [],
+    "stylesheetNamesCoveredByDirectory": 14
+  },
+  "C_shellCss": {
+    "files": [
+      "index-BPHePDI_.css",
+      "vendor-BNsW4eBh.css"
+    ],
+    "perFile": [
+      {
+        "file": "index-BPHePDI_.css",
+        "declared": 2,
+        "referenced": 149,
+        "referencedAlias": 55
+      },
+      {
+        "file": "vendor-BNsW4eBh.css",
+        "declared": 0,
+        "referenced": 0,
+        "referencedAlias": 0
+      }
+    ],
+    "declared": 2,
+    "declaredAlias": 0,
+    "referenced": 149,
+    "referencedAlias": 55,
+    "declaredNames": [
+      "--dsw-elevation-stroke-color",
+      "--dsw-hovercard-bg"
+    ],
+    "referencedAliasNames": [
+      "--dsw-alias-bg-base",
+      "--dsw-alias-bg-layer-1",
+      "--dsw-alias-bg-layer-2",
+      "--dsw-alias-bg-layer-3",
+      "--dsw-alias-bg-layer-4",
+      "--dsw-alias-bg-mask-1",
+      "--dsw-alias-bg-module-platform",
+      "--dsw-alias-border-l1",
+      "--dsw-alias-border-l2",
+      "--dsw-alias-border-l2-darkmode-thin",
+      "--dsw-alias-border-l3",
+      "--dsw-alias-border-l4",
+      "--dsw-alias-brand-primary",
+      "--dsw-alias-brand-primary-new-colorprimary-new-color",
+      "--dsw-alias-button-ghost-active-border",
+      "--dsw-alias-button-ghost-active-fill",
+      "--dsw-alias-button-primary-fill",
+      "--dsw-alias-button-primary-hover",
+      "--dsw-alias-button-tool-bar-fill",
+      "--dsw-alias-button-tool-bar-hover",
+      "--dsw-alias-code-diff-added",
+      "--dsw-alias-code-diff-deleted",
+      "--dsw-alias-interactive-bg-active",
+      "--dsw-alias-interactive-bg-hover",
+      "--dsw-alias-interactive-bg-hover-danger",
+      "--dsw-alias-label-caption",
+      "--dsw-alias-label-dimmed",
+      "--dsw-alias-label-error",
+      "--dsw-alias-label-primary",
+      "--dsw-alias-label-primary-foreground",
+      "--dsw-alias-label-secondary",
+      "--dsw-alias-label-shimmer",
+      "--dsw-alias-label-tertiary",
+      "--dsw-alias-link",
+      "--dsw-alias-markdown-code-block",
+      "--dsw-alias-markdown-code-block-banner",
+      "--dsw-alias-markdown-inline-code",
+      "--dsw-alias-markdown-tag",
+      "--dsw-alias-menu-group-header-fill",
+      "--dsw-alias-menu-icon",
+      "--dsw-alias-scrollbar-bg-l2",
+      "--dsw-alias-scrollbar-hover-l2",
+      "--dsw-alias-state-business-primary",
+      "--dsw-alias-state-error-primary",
+      "--dsw-alias-state-idle-primary",
+      "--dsw-alias-state-success-primary",
+      "--dsw-alias-state-success-tertiary",
+      "--dsw-alias-state-warn-label",
+      "--dsw-alias-state-warn-primary",
+      "--dsw-alias-state-warn-tertiary",
+      "--dsw-alias-switch-thumb",
+      "--dsw-alias-toast-bg",
+      "--dsw-alias-toast-label",
+      "--dsw-alias-tooltip-bg",
+      "--dsw-alias-tooltip-key-bg"
+    ]
+  },
+  "D_tree": {
+    "owners": [
+      {
+        "pkg": "dsh-client-ui-theme",
+        "declared": 403
+      }
+    ],
+    "declaredUnion": 403,
+    "declaredUnionByPrefix": {
+      "font": 182,
+      "alias": 107,
+      "static": 77,
+      "specific": 11,
+      "radius": 6,
+      "elevation": 5,
+      "shadow": 4,
+      "gradient": 3,
+      "menu": 2,
+      "focus": 2,
+      "linear": 2,
+      "corner": 1,
+      "mask": 1
+    },
+    "referencedUnion": 185,
+    "referencedNotDeclared": [
+      "--dsw-alias-bg-l1",
+      "--dsw-alias-bg-layer-4",
+      "--dsw-alias-fill-l1",
+      "--dsw-alias-fill-l2",
+      "--dsw-alias-fill-tertiary",
+      "--dsw-alias-fill-tsp-secondary",
+      "--dsw-alias-label-quaternary",
+      "--dsw-alias-separator-primary",
+      "--dsw-font",
+      "--dsw-font-mono",
+      "--dsw-font-sm-13"
+    ]
+  },
+  "E_resolution": {
+    "light": {
+      "literal": 229,
+      "resolved-chain": 138,
+      "unresolved-ref": 25,
+      "resolved-with-fallback": 11
+    },
+    "dark": {
+      "literal": 229,
+      "resolved-chain": 138,
+      "unresolved-ref": 25,
+      "resolved-with-fallback": 11
+    },
+    "unresolvedInLight": [
+      "--dsw-font-markdown-h1",
+      "--dsw-font-markdown-h1-line-height",
+      "--dsw-font-markdown-h1-font-size",
+      "--dsw-font-markdown-h2",
+      "--dsw-font-markdown-h2-line-height",
+      "--dsw-font-markdown-h2-font-size",
+      "--dsw-font-markdown-h3",
+      "--dsw-font-markdown-h3-line-height",
+      "--dsw-font-markdown-h3-font-size",
+      "--dsw-font-markdown-h4",
+      "--dsw-font-markdown-h4-line-height",
+      "--dsw-font-markdown-base",
+      "--dsw-font-markdown-base-line-height",
+      "--dsw-font-markdown-base-strong",
+      "--dsw-font-markdown-base-strong-line-height",
+      "--dsw-font-markdown-base-italic",
+      "--dsw-font-markdown-base-italic-line-height",
+      "--dsw-font-markdown-base-strong-italic",
+      "--dsw-font-markdown-base-strong-italic-line-height",
+      "--dsw-font-markdown-code",
+      "--dsw-font-markdown-code-font-family",
+      "--dsw-font-markdown-code-block",
+      "--dsw-font-markdown-code-block-font-family",
+      "--dsw-font-markdown-code-block-small",
+      "--dsw-font-markdown-code-block-small-font-family"
+    ],
+    "unresolvedInDark": [
+      "--dsw-font-markdown-h1",
+      "--dsw-font-markdown-h1-line-height",
+      "--dsw-font-markdown-h1-font-size",
+      "--dsw-font-markdown-h2",
+      "--dsw-font-markdown-h2-line-height",
+      "--dsw-font-markdown-h2-font-size",
+      "--dsw-font-markdown-h3",
+      "--dsw-font-markdown-h3-line-height",
+      "--dsw-font-markdown-h3-font-size",
+      "--dsw-font-markdown-h4",
+      "--dsw-font-markdown-h4-line-height",
+      "--dsw-font-markdown-base",
+      "--dsw-font-markdown-base-line-height",
+      "--dsw-font-markdown-base-strong",
+      "--dsw-font-markdown-base-strong-line-height",
+      "--dsw-font-markdown-base-italic",
+      "--dsw-font-markdown-base-italic-line-height",
+      "--dsw-font-markdown-base-strong-italic",
+      "--dsw-font-markdown-base-strong-italic-line-height",
+      "--dsw-font-markdown-code",
+      "--dsw-font-markdown-code-font-family",
+      "--dsw-font-markdown-code-block",
+      "--dsw-font-markdown-code-block-font-family",
+      "--dsw-font-markdown-code-block-small",
+      "--dsw-font-markdown-code-block-small-font-family"
+    ],
+    "unresolvedDetail": {
+      "--dsw-font-markdown-h1": [
+        "--dsh-content-font-delta"
+      ],
+      "--dsw-font-markdown-h1-line-height": [
+        "--dsh-content-font-delta"
+      ],
+      "--dsw-font-markdown-h1-font-size": [
+        "--dsh-content-font-delta"
+      ],
+      "--dsw-font-markdown-h2": [
+        "--dsh-content-font-delta"
+      ],
+      "--dsw-font-markdown-h2-line-height": [
+        "--dsh-content-font-delta"
+      ],
+      "--dsw-font-markdown-h2-font-size": [
+        "--dsh-content-font-delta"
+      ],
+      "--dsw-font-markdown-h3": [
+        "--dsh-content-font-delta"
+      ],
+      "--dsw-font-markdown-h3-line-height": [
+        "--dsh-content-font-delta"
+      ],
+      "--dsw-font-markdown-h3-font-size": [
+        "--dsh-content-font-delta"
+      ],
+      "--dsw-font-markdown-h4": [
+        "--dsh-content-font-delta"
+      ],
+      "--dsw-font-markdown-h4-line-height": [
+        "--dsh-content-font-delta"
+      ],
+      "--dsw-font-markdown-base": [
+        "--dsh-content-font-delta"
+      ],
+      "--dsw-font-markdown-base-line-height": [
+        "--dsh-content-font-delta"
+      ],
+      "--dsw-font-markdown-base-strong": [
+        "--dsh-content-font-delta"
+      ],
+      "--dsw-font-markdown-base-strong-line-height": [
+        "--dsh-content-font-delta"
+      ],
+      "--dsw-font-markdown-base-italic": [
+        "--dsh-content-font-delta"
+      ],
+      "--dsw-font-markdown-base-italic-line-height": [
+        "--dsh-content-font-delta"
+      ],
+      "--dsw-font-markdown-base-strong-italic": [
+        "--dsh-content-font-delta"
+      ],
+      "--dsw-font-markdown-base-strong-italic-line-height": [
+        "--dsh-content-font-delta"
+      ],
+      "--dsw-font-markdown-code": [
+        "--ds-font-family-code"
+      ],
+      "--dsw-font-markdown-code-font-family": [
+        "--ds-font-family-code"
+      ],
+      "--dsw-font-markdown-code-block": [
+        "--ds-font-family-code"
+      ],
+      "--dsw-font-markdown-code-block-font-family": [
+        "--ds-font-family-code"
+      ],
+      "--dsw-font-markdown-code-block-small": [
+        "--ds-font-family-code"
+      ],
+      "--dsw-font-markdown-code-block-small-font-family": [
+        "--ds-font-family-code"
+      ]
+    },
+    "unresolvedNamespace": {
+      "--dsh-*": 19,
+      "other": 6
+    }
+  },
+  "F_resolutionWithPlatformVars": {
+    "note": "把同一批样式表里的平台级变量（--ds-* / --dsh-* 等）一并作为解析上下文后再解析 A 的并集",
+    "platformVars": {
+      "light": 24,
+      "dark": 9,
+      "namespaces": {
+        "--ds-*": 5,
+        "--dsh-*": 8,
+        "other": 11
+      },
+      "names": [
+        "--ds-font-family-code",
+        "--ds-ease-in-out",
+        "--ds-transition-duration",
+        "--ds-transition-duration-fast",
+        "--ds-transition-duration-slow",
+        "--dsh-scrollbar-thumb",
+        "--dsh-scrollbar-thumb-hover",
+        "--dsh-scrollbar-thumb-border",
+        "--dsh-scrollbar-track-margin",
+        "--dsh-scrollbar-width",
+        "--dsh-content-font-delta",
+        "--dsh-content-font-size-secondary",
+        "--dsh-content-font-delta-secondary",
+        "--shiki-foreground",
+        "--shiki-background",
+        "--shiki-token-constant",
+        "--shiki-token-string",
+        "--shiki-token-comment",
+        "--shiki-token-keyword",
+        "--shiki-token-parameter",
+        "--shiki-token-function",
+        "--shiki-token-string-expression",
+        "--shiki-token-punctuation",
+        "--shiki-token-link"
+      ],
+      "examples": [
+        "--ds-font-family-code",
+        "--ds-ease-in-out",
+        "--ds-transition-duration",
+        "--ds-transition-duration-fast",
+        "--ds-transition-duration-slow",
+        "--dsh-scrollbar-thumb",
+        "--dsh-scrollbar-thumb-hover",
+        "--dsh-scrollbar-thumb-border"
+      ]
+    },
+    "light": {
+      "literal": 229,
+      "resolved-chain": 164,
+      "resolved-with-fallback": 10
+    },
+    "dark": {
+      "literal": 229,
+      "resolved-chain": 164,
+      "resolved-with-fallback": 10
+    },
+    "unresolvedInLight": [],
+    "unresolvedInDark": []
+  }
+}

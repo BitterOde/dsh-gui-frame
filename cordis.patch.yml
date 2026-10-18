@@ -1,0 +1,24 @@
+# dsh-gui-frame 的 bundle patch —— 本包唯一的注册通道。
+#
+# 宿主组合方式（家族同形，dsh-app-boot 实测）：
+#   profile 的 `dsh.profile.bundles` 里点名 `dsh-gui-frame` 时，宿主读本包 package.json 的
+#   `dsh.bundle.patch`（= 本文件），把下面这一行 insert 进该 profile 的组合。
+#   若 web profile 已带 `dsh.profile.patchReload: live`
+#   ⇒ 之后做行级增删（装/卸本包）无需重启 dsh web。
+#
+# ⚠ 两条通道**只能二选一**（同族插件在这个形状上出过事故）：
+#   ① bundle 模式（推荐）：包写进 profile 的 `dsh.profile.bundles`
+#      （`dsh plugin --profile web add link:<本包路径>` 会自动 reconcile 进去），本文件贡献 insert 行；
+#   ② dev 模式：不写 bundles，直接把同一段 `insert:` 行抄进 profile 的 `cordis.patch.yml`。
+#   两条同时存在 ⇒ 组合里出现两行 `id: gui-frame` ⇒ 加载器抛
+#   `duplicate loader entry id: gui-frame`，DSH 起不来，且该 profile 上的插件市场安装/更新
+#   都会被试启动校验拦下并回滚。
+#   自检：tests/unit/skeleton.test.mjs 的「注册通道只有一个 / 二选一」两条用例。
+#
+# **不动 profile**：本文件只是一份声明，真要装载由用户在场执行
+# （纪律：不得另起或重启正在跑的 dsh web）。
+#
+# id 恒为 gui-frame（= src/host/index.mjs 的 `name`）；name 恒为包名。
+- insert:
+    - id: gui-frame
+      name: 'dsh-gui-frame'

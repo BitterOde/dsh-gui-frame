@@ -1,0 +1,16 @@
+# anchor: API Gateway owns the loop; a second call throws
+# offset: 5841
+
+onnect(): void;
+    /**
+     * Register the sole source defining Host generations. The source reports
+     * ready only after its incremental listeners are attached.
+     * @param source - long-lived generation source owned by the push carrier.
+     * @returns disposer withdrawing the source and stopping an active loop.
+     */
+    registerGenerationSource(source: ConnectionGenerationSource): () => void;
+    /**
+     * Start the connect/reconnect loop with the consumer's state callbacks.
+     * API Gateway owns the loop; a second call throws.
+     * @param sinks - connection-state callbacks.
+     * @

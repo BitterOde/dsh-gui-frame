@@ -1,0 +1,63 @@
+﻿# file: @deepseek-ai/dsh/node_modules/@deepseek-ai/cordis/lib/index.js
+# bytes: 60378  chars: 60228  pattern: /_setEpoch\(epoch\)/g  window: 100/1300  maxHits: 1
+
+===== hit 1 @ char 42830 (line 1327) match="_setEpoch(epoch)" =====
+
+			if (!impl) {
+				epoch = INACTIVE;
+				break;
+			}
+			epoch += ":" + impl.fiber.uid;
+		}
+		this._setEpoch(epoch);
+	}
+	_setEpoch(epoch) {
+		const oldEpoch = this._runner.epoch;
+		if (epoch === oldEpoch) return;
+		this._runner.epoch = epoch;
+		if (this.inertia) return;
+		this._updateState(() => {
+			if (epoch !== INACTIVE && oldEpoch === INACTIVE) {
+				this.inertia = this._reload();
+				return 1;
+			} else {
+				this.inertia = this._unload();
+				return 5;
+			}
+		});
+	}
+	_resolveConfig(config) {
+		config = this.context.waterfall(this, "internal/config", config, () => config);
+		return this.runtime ? resolveConfig(this.runtime, config) : config;
+	}
+	async _reload() {
+		this.store = { ...this._store };
+		const oldEpoch = this._runner.epoch;
+		try {
+			await Promise.resolve();
+			if (this._runner.epoch === oldEpoch) {
+				this.config = this._resolveConfig(this._config);
+				await this._execute(this._runner);
+				this._error = void 0;
+			}
+		} catch (reason) {
+			this.ctx.logger.error(reason);
+			this._error = reason;
+			this._runner.epoch = INACTIVE;
+		}
+		this._updateState(() => {
+			if (this._runner.epoch === oldEpoch) this.inertia = void 0;
+			else {
+				this.inertia = this._unload();
+				return 5;
+			}
+		});
+	}
+	async _unload() {
+		await Promise.all(this._disposables.clear().map(async (dispose) => {
+			try {
+				await composeError(async (info) => {
+					await Promise.resolve();
+					info.e
+
+# total hits shown: 1 (capped)

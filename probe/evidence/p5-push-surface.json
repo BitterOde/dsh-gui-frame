@@ -1,0 +1,85 @@
+{
+  "question": "API Gateway 的 WebSocket mux 是否暴露可供第三方订阅的面？",
+  "files": {
+    "gatewayHost": "<dsh-install>/dsh-api-gateway/lib/index.js",
+    "gatewayClient": "<dsh-install>/dsh-api-gateway/lib/client.js",
+    "gatewayHostTypes": "<dsh-install>/dsh-api-gateway/lib/types/index.d.ts",
+    "streamClientTypes": "<dsh-install>/dsh-api-gateway/lib/types/client/stream-client.d.ts",
+    "streamServerTypes": "<dsh-install>/dsh-api-gateway/lib/types/stream-server.d.ts",
+    "streamProtocolTypes": "<dsh-install>/dsh-api-gateway/lib/types/stream-protocol.d.ts",
+    "gatewayClientTypes": "<dsh-install>/dsh-api-gateway/lib/types/client/index.d.ts",
+    "connectionRpcTypes": "<dsh-install>/dsh-client-connection/lib/types/rpc.d.ts",
+    "connectionClientTypes": "<dsh-install>/dsh-client-connection/lib/types/client/index.d.ts",
+    "typertRegistryTypes": "<dsh-install>/dsh-typert-registry/lib/types/index.d.ts"
+  },
+  "verdicts": {
+    "browserRpcOpenMissing": true,
+    "muxAddressesTypertEndpoints": true,
+    "remoteEventsSingleOccupant": true,
+    "generationSourceSoleAndStartThrows": true,
+    "transportOpenStreamIsShellOwned": true,
+    "typertRegisterIsPublic": true
+  },
+  "slices": {
+    "browserRpcOpen": {
+      "anchor": "readonly open?:",
+      "found": true,
+      "offset": 11140
+    },
+    "connectionHandleSoleSource": {
+      "anchor": "registerGenerationSource(source",
+      "found": true,
+      "offset": 5675
+    },
+    "connectionHandleStart": {
+      "anchor": "API Gateway owns the loop; a second call throws",
+      "found": true,
+      "offset": 5841
+    },
+    "transportHooksOpenStream": {
+      "anchor": "Worker-local Gateway stream carrier",
+      "found": true,
+      "offset": 2768
+    },
+    "muxClientOpen": {
+      "anchor": "open(endpoint: string",
+      "found": true,
+      "offset": 1642
+    },
+    "muxServerOpener": {
+      "anchor": "export type RemoteStreamOpener",
+      "found": true,
+      "offset": 559
+    },
+    "remoteStreamOptions": {
+      "anchor": "Domain-owned operations used by",
+      "found": true,
+      "offset": 754
+    },
+    "registerRemoteEventsThrows": {
+      "anchor": "forwarded Remote event source is already registered",
+      "found": true,
+      "offset": 24443
+    },
+    "registerRemoteEventsDoc": {
+      "anchor": "Register the sole application-selected forwarded-event source",
+      "found": true,
+      "offset": 3647
+    },
+    "clientNamespacesDoc": {
+      "anchor": "Client projection of generated Typert Remote descriptors",
+      "found": true,
+      "offset": 7
+    },
+    "namespaceSetBuild": {
+      "anchor": "const namespaces = new Set([...direct.keys(), ...scoped.keys()])",
+      "found": true,
+      "offset": 62914
+    },
+    "typertRegister": {
+      "anchor": "register(contribution: TypertContribution)",
+      "found": true,
+      "offset": 541
+    }
+  }
+}

@@ -1,0 +1,44 @@
+﻿# file: @deepseek-ai/dsh/node_modules/@deepseek-ai/dsh-app-boot/lib/index.js
+# bytes: 69668  chars: 69644  pattern: /async function assertEntriesActivated/g  window: 100/1500  maxHits: 1
+
+===== hit 1 @ char 63022 (line 1465) match="async function assertEntriesActivated" =====
+eckpoint when an entry failed to
+* import, rejected during activation, or did not become active.
+*/
+async function assertEntriesActivated(ctx, binName) {
+	assertEntriesLoaded(ctx, binName);
+	const failures = [];
+	const rejectionReasons = [];
+	for (const entry of ctx.loader.entries()) {
+		const fiber = entry.fiber;
+		if (fiber === void 0 || entry.disabled) continue;
+		const state = fiber.state;
+		if (state === FIBER_ACTIVE) continue;
+		if (state === FIBER_FAILED) {
+			try {
+				await fiber.await();
+			} catch (error) {
+				rejectionReasons.push(error);
+				failures.push(`${entry.options.name}: ${formatActivationError(error)}`);
+			}
+			continue;
+		}
+		if (state === FIBER_PENDING) {
+			const missing = Object.keys(fiber.inject).filter((service) => fiber.ctx.get(service) === void 0);
+			const subject = missing.length === 1 ? "service" : "services";
+			failures.push(`${entry.options.name}: pending (waiting for ${subject}: ${missing.join(", ") || "unknown"})`);
+		} else failures.push(`${entry.options.name}: fiber state ${String(state)}`);
+	}
+	if (failures.length > 0) {
+		if (rejectionReasons.length > 0) await observeLoaderRejectionCheckpoint(rejectionReasons);
+		const noun = failures.length === 1 ? "entry" : "entries";
+		throw new Error(`${binName}: ${String(failures.length)} ${noun} did not activate\n${failures.join("\n")}`);
+	}
+}
+/**
+* Boot the Loader against `absoluteConfigPath` and return only after the whole
+* tree settles. Relative entry names resolve against the config directory;
+* bare package names resolve there by default or against an explicit
+* `bareModuleBaseUrl` for closed packaged runtimes. The bootst
+
+# total hits shown: 1 (capped)

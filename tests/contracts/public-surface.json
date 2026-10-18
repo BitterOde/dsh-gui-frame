@@ -1,0 +1,58 @@
+{
+  "service": "gui-frame",
+  "version": "1.0.0",
+  "capabilities": [
+    "dock",
+    "overlay",
+    "panel"
+  ],
+  "serviceMembers": [
+    "capabilities",
+    "components",
+    "dock",
+    "overlay",
+    "register",
+    "supports",
+    "version"
+  ],
+  "components": [
+    "Empty",
+    "ErrorState",
+    "KeyValue",
+    "List",
+    "Panel",
+    "Toolbar"
+  ],
+  "slots": [
+    "main",
+    "sidebar.panellist"
+  ],
+  "inject": [
+    "connection",
+    "settingsScope",
+    "slots"
+  ],
+  "errorCodes": [
+    "GUIF-E-CAPABILITY-ABSENT",
+    "GUIF-E-CHANNEL-INVALID",
+    "GUIF-E-COMPONENT-DUPLICATE",
+    "GUIF-E-COMPONENT-INVALID",
+    "GUIF-E-CTX-INVALID",
+    "GUIF-E-ENTRY-DUPLICATE",
+    "GUIF-E-ENTRY-INVALID",
+    "GUIF-E-LAYOUT-INVALID",
+    "GUIF-E-OVERLAY-ID",
+    "GUIF-E-OVERLAY-SPEC",
+    "GUIF-E-SLICE-INVALID",
+    "GUIF-E-Z-RANGE",
+    "GUIF-W-LAYOUT-CORRUPT",
+    "GUIF-W-LISTENER-THREW",
+    "GUIF-W-SERVICE-CONFLICT",
+    "GUIF-W-THEME-DYNAMIC-TOKEN",
+    "GUIF-W-THEME-LITERAL-COLOR",
+    "GUIF-W-THEME-PRIVATE-LEAK",
+    "GUIF-W-THEME-TOKEN-UNKNOWN",
+    "GUIF-W-Z-RESERVED",
+    "GUIF-W-Z-SEGMENT"
+  ]
+}

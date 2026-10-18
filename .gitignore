@@ -1,0 +1,56 @@
+# ── 依赖与安装产物 ─────────────────────────────────────────────
+node_modules/
+
+# ── npm 打包产物（`npm run pack` 是 --dry-run，正常情况下不该出现）──
+*.tgz
+
+# ── 临时/中间态文件（本仓惯例：`.tmp-` 前缀）──────────────────
+.tmp-*/
+
+# ── 日志 ──────────────────────────────────────────────────────
+*.log
+npm-debug.log*
+
+# ── 编辑器 / 系统噪音 ─────────────────────────────────────────
+.DS_Store
+Thumbs.db
+desktop.ini
+.idea/
+.vscode/
+*.swp
+
+# ── 本地环境（绝不入库）───────────────────────────────────────
+.env
+.env.local
+
+# ── 开发期原始取证 dump（**不入库**）──────────────────────────
+# 这三处是本机环境的**原始输出**：含本机绝对路径、临时 profile 名、宿主配置快照与
+# 逐轮截图，公开价值低而隐私面大；它们都是**可重跑重建**的产物，不是源码也不是判据。
+#   · `probe/evidence/t58-*/`          平台探针 T58 的原始记录（约 7.6 MB）
+#   · `verify/real-machine/evidence/`  真机装置逐轮原始记录（62 轮，约 3.7 MB）
+#   · `tools/evidence/`                出图工具与临时实例的日志/截图（约 1.6 MB）
+# 重建方式见 `verify/real-machine/README.md` 与 `probe/README.md`。
+probe/evidence/t58-*/
+verify/real-machine/evidence/
+tools/evidence/
+
+# ── 开发过程留档（**选择性入库**）────────────────────────────
+# `docs/**` 是开发期的日志/验收记录/事故报告/调研稿，按轮次写作、含本机路径与内部
+# 轮次口径 ⇒ 不随仓发布。**例外**：两份探针记录必须入库 ——
+# `tests/verify-surface/probe-record.test.mjs` 会对它们做「证据清单逐行落地」校验，
+# 少了这两份 `npm test` 直接红（实测：ENOENT ⇒ 整文件 fail）。
+docs/*
+!docs/探针记录-运行稳定性.md
+!docs/探针记录-主题与推送.md
+
+# ── 工具产物 ──────────────────────────────────────────────────
+x.png
+
+# 说明（不写进 .gitignore 的判定，留在这里供人看）：
+#  · `package-lock.json` **要入库** —— 它是 devDependencies（jsdom / react / testing-library）的可复算证据；
+#  · `lib/**` **要入库** —— 它是交付面产物（随包发布），且由 `verify/freeze-rev.json` 冻结字节与哈希；
+#  · `probe/evidence/*.json`、`probe/evidence/*.txt`（小体量）**要入库** ——
+#    `tests/unit/panel-tokens.test.mjs` 与 `tests/verify-surface/probe-record.test.mjs`
+#    会读它们；只有 `t58-*` 那四个大目录被排除。
+#  · `verify/real-machine/check-citations.mjs` 会校验引用是否落到 `evidence/<轮次>`；
+#    真机 dump 未随仓 ⇒ 该脚本在未重跑装置前会报「引用的轮次不存在」，这是**预期**的。

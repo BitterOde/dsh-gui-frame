@@ -1,0 +1,83 @@
+﻿# file: @deepseek-ai/dsh/node_modules/@deepseek-ai/dsh-client-connection/lib/index.js
+# bytes: 32900  chars: 32890  pattern: /register\(/g  window: 150/500  maxHits: 6
+
+===== hit 1 @ char 22294 (line 543) match="register(" =====
+annel registry scoped to the Context reading this service. */
+	get rpc() {
+		const owner = this.ctx;
+		return {
+			handle: (channel, handler) => this.register(owner, channel, handler),
+			intercept: (channel, matches, handler) => this.registerInterceptor(owner, channel, matches, handler)
+		};
+	}
+	/** Exact Fetch-route registry scoped to the Context reading this service. */
+	get fetch() {
+		const owner = this.ctx;
+		return { register: (route) => this.registerFetchRoute(owner, route) };
+	}
+	/** Apply the configured Host/Origin fence, then browser authentication. */
+	requestRejection(request) {
+		if (!isTrustedApiRequest(request, this.trustedHosts)) retu
+
+===== hit 2 @ char 24742 (line 602) match="register(" =====
+t(route.path, registered);
+			return () => {
+				this.fetchRoutes.delete(route.path);
+			};
+		}, `client-connection: ${route.path} Fetch route`);
+	}
+	register(owner, channel, handler) {
+		assertChannel(channel);
+		const fetchHandler = rpcFetchHandler(channel, handler);
+		const route = {
+			kind: "prefix",
+			path: channel,
+			handler: async (req, res) => {
+				const rejection = this.requestRejection(req);
+				if (rejection !== void 0) {
+					res.writeHead(rejection);
+					res.end(rejection === 401 ? "unauthorized" : "forbidden");
+					return;
+				}
+				await bridge(req, res, fetchHandler);
+			}
+		};
+		return owner.effect(() => owner.webServer.register
+
+===== hit 3 @ char 25243 (line 618) match="register(" =====
+1 ? "unauthorized" : "forbidden");
+					return;
+				}
+				await bridge(req, res, fetchHandler);
+			}
+		};
+		return owner.effect(() => owner.webServer.register(route), `client-connection: ${channel} rpc channel`);
+	}
+	registerInterceptor(owner, channel, matches, handler) {
+		if (channel !== "/api") throw new Error(`connection: invalid shared RPC channel ${JSON.stringify(channel)}`);
+		const interceptor = {
+			matches,
+			fetchHandler: rpcFetchHandler(channel, handler)
+		};
+		return owner.effect(() => {
+			if (this.interceptors.has(channel)) throw new Error(`connection: shared RPC channel ${JSON.stringify(channel)} already has an interceptor`);
+			this.
+
+===== hit 4 @ char 32498 (line 781) match="register(" =====
+d" : "forbidden");
+					return;
+				}
+				await bridge(req, res, fetchHandler, maxRequestBodyBytes);
+			}
+		};
+		webCtx.effect(() => webCtx.webServer.register(route), "client-connection: /api route");
+	});
+	ctx.inject(["attachments"], (attachmentCtx) => {
+		assertImageBodyCapacity(attachmentCtx, maxRequestBodyBytes);
+	});
+}
+//#endregion
+export { API_PATH, Config, HostConnectionService, RpcId, apply, clientRequestSchema, inject, name, rpcErrorSchema, rpcIdSchema, rpcMessageSchema, rpcResultSchema, serverResponseSchema, transportError };
+
+
+# total hits shown: 4

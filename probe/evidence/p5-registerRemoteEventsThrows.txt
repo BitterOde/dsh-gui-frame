@@ -1,0 +1,12 @@
+# anchor: forwarded Remote event source is already registered
+# offset: 24443
+
+ by the Remote assembly.
+	* @param host - stable Host facts included in each Client generation's opening frame.
+	* @returns disposer removing this source and cancelling its active streams.
+	*/
+	registerRemoteEvents(source, host) {
+		if (this.remoteEvents !== void 0) throw new Error("typert gateway: forwarded Remote event source is already registered");
+		const lifetime = new AbortController();
+		const stream = source(lifetime.signal);
+		const regi

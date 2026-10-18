@@ -1,0 +1,76 @@
+{
+  "name": "dsh-gui-frame",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "DSH（DeepSeek Harness）的「坞 + 按钮面板」基类插件：以客户端服务 ctx.gui-frame 的形态，向其它插件提供入口坞（动作型入口的收纳台）、面板骨架、浮层与主题守门四项能力。本包是独立发布线：不含数据通道、布局编辑与持久化、浮动窗口与演示面板。未装本包时页面完全不受影响。",
+  "license": "MIT",
+  "author": "BitterOde",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/BitterOde/dsh-gui-frame.git"
+  },
+  "homepage": "https://github.com/BitterOde/dsh-gui-frame#readme",
+  "keywords": [
+    "dsh",
+    "dsh-plugin",
+    "deepseek-harness",
+    "cordis",
+    "gui",
+    "dock",
+    "panel",
+    "client-plugin"
+  ],
+  "main": "lib/index.js",
+  "exports": {
+    ".": "./lib/index.js",
+    "./client": "./lib/client.js",
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "lib",
+    "cordis.patch.yml",
+    "README.md",
+    "guide"
+  ],
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    },
+    "client": {
+      "platform": "web"
+    }
+  },
+  "scripts": {
+    "build": "node scripts/build-host.mjs && node scripts/build-client.mjs",
+    "build:host": "node scripts/build-host.mjs",
+    "build:client": "node scripts/build-client.mjs",
+    "prepack": "node scripts/build-host.mjs && node scripts/build-client.mjs",
+    "test": "node scripts/run-tests.mjs",
+    "test:unit": "node scripts/run-tests.mjs --pattern \"tests/unit/**/*.test.mjs\"",
+    "guards": "node scripts/guards.selftest.mjs",
+    "check:tokens": "node scripts/check-tokens.mjs",
+    "check:boundaries": "node scripts/check-boundaries.mjs",
+    "check:boundaries:print": "node scripts/check-boundaries.mjs --print",
+    "check:boundaries:selftest": "node scripts/check-boundaries.mjs --selftest",
+    "link": "node scripts/link-dsh.mjs",
+    "unlink": "node scripts/link-dsh.mjs --unlink",
+    "pack": "npm pack --dry-run"
+  },
+  "peerDependencies": {
+    "@deepseek-ai/cordis": "^4.0.2"
+  },
+  "peerDependenciesMeta": {
+    "@deepseek-ai/cordis": {
+      "optional": true
+    }
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "@testing-library/dom": "^10.4.0",
+    "@testing-library/react": "^16.3.3",
+    "jsdom": "^30.1.1",
+    "react": "^19.3.0",
+    "react-dom": "^19.3.0"
+  },
+  "comment": "【包清单硬约束（改前必读）】① dependencies 恒为空 —— 宿主半区只**动态** import 平台自带的 @deepseek-ai/*（peerDependencies 只是「宿主提供」声明，不进依赖树）；客户端产物 lib/client.js 只 require 外壳运行时提供的种子键，绝不内联。② 不存在 dsh.client.external —— 种子键由外壳的 __ModuleLoader__ 提供，写进清单会让打包白名单与实际运行期解析两侧打架。③ 不写 dsh.engines —— 它不是官方 manifest 字段，写它只会制造「以为是兼容闸」的假安全感；版本兼容由运行期探针断言（本地版本优先）。④ loader entry id 恒为 gui-frame（cordis.patch.yml 的 insert id === src/host/index.mjs 的 name === 客户端产物 bundle id）。⑤ 装载通道**二选一**：bundle 模式（本包名进 profile 的 dsh.profile.bundles，由本包 cordis.patch.yml 贡献 insert 行）**或** dev 模式（把同一段 insert 行抄进 profile 的 cordis.patch.yml）；两条同时存在 ⇒ duplicate loader entry id，DSH 起不来。⑥ lib/index.js 与 lib/host/** = scripts/build-host.mjs 生成；lib/client.js = scripts/build-client.mjs 生成（两者都是生成物，请勿手改）。⑦ devDependencies 只服务真 React 渲染测试，dev-only，不进产物、不进 dependencies。⑧ 文件归属见 README「目录与归属」表。⑨ peerDependencies 里的 @deepseek-ai/cordis 标了 peerDependenciesMeta.optional —— 不是可省，而是**不许 npm 从 registry 装一份副本**：宿主半区动态 import 必须解析到宿主自己那一份（开发时用 `npm run link` 把 node_modules/@deepseek-ai/* 指向 DSH 安装）。若让 npm 装出第二份 cordis，就会出现双实例（Service 身份不一致）。⑩ version 与公开面快照 tests/contracts/public-surface.json 的 version 同值（真源＝src/client/contracts/service-face.mjs 的 SERVICE_VERSION），客户端诊断常量 CLIENT_VERSION 必须跟它逐字一致；发布线**不得**写 private: true（写了 `npm publish` 会拒），files 是精确清单（多一项少一项都判红）。"
+}

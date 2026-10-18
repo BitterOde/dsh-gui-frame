@@ -1,0 +1,118 @@
+{
+  "platform": {
+    "dshVersion": "0.2.0-rc.2",
+    "cordis": "~4.0.4",
+    "install": "<dsh-install>"
+  },
+  "results": [
+    {
+      "scenario": "S1 外壳原样：一个 apply 抛错",
+      "appMounted": false,
+      "pageFailure": "web boot: 1 entry did not activate\n@probe/boom: failed",
+      "pageStates": {
+        "@probe/ui-renderer": "active",
+        "@probe/ok": "active",
+        "@probe/boom": "failed"
+      },
+      "events": [
+        [
+          "page.setTotal",
+          "3"
+        ],
+        [
+          "page.setState",
+          "@probe/ui-renderer",
+          "loading"
+        ],
+        [
+          "page.setState",
+          "@probe/ok",
+          "loading"
+        ],
+        [
+          "page.setState",
+          "@probe/boom",
+          "loading"
+        ],
+        [
+          "page.setState",
+          "@probe/boom",
+          "unloading"
+        ],
+        [
+          "page.setState",
+          "@probe/ui-renderer",
+          "active"
+        ],
+        [
+          "page.setState",
+          "@probe/ok",
+          "active"
+        ],
+        [
+          "page.setState",
+          "@probe/boom",
+          "failed"
+        ],
+        [
+          "console.error",
+          "Error: web boot: 1 entry did not activate\n@probe/boom: failed\n    at Object.assertEntriesActive (file:///D:/MyPlugins/GUIFrame/v1-dsh-gui-frame/probe/runtime/shell-boot.mjs:157:15)\n    at Object.runPluginBoot (file:///D:/MyPlugins/GUIFrame/v1-dsh-gui-frame/probe/runtime/shell-boot.mjs:137:12)\n    at async Object.run (file:///D:/MyPlugins/GUIFrame/v1-dsh-gui-frame/probe/runtime/shell-boot.mjs:85:9)\n    at async file:///D:/MyPlugins/GUIFrame/v1-dsh-gui-frame/probe/runtime/apply-throw-probe.mjs:68:3"
+        ],
+        [
+          "page.fail",
+          "web boot: 1 entry did not activate\n@probe/boom: failed"
+        ],
+        [
+          "page.dispose"
+        ]
+      ],
+      "entriesAfterBoot": [
+        {
+          "id": "@probe/ui-renderer",
+          "fiberState": "active"
+        },
+        {
+          "id": "@probe/ok",
+          "fiberState": "active"
+        },
+        {
+          "id": "@probe/boom",
+          "fiberState": "failed"
+        }
+      ],
+      "okAppliedCount": 1
+    },
+    {
+      "scenario": "S2 改动版：吞掉 create 拒绝后再单独跑 assertEntriesActive",
+      "createError": null,
+      "entriesAfterCreate": [
+        {
+          "id": "@probe/boom",
+          "fiberState": "failed"
+        }
+      ],
+      "auditError": "web boot: 1 entry did not activate\n@probe/boom: failed",
+      "note": "壳内原样不会走到这一步：create 拒绝先冒泡出 run()"
+    },
+    {
+      "scenario": "S3 inject 未满足：声明 inject: [\"gui-frame\"] 而无人提供",
+      "appMounted": false,
+      "pageFailure": "web boot: 1 entry did not activate\n@probe/needs-frame: pending (waiting for service: gui-frame)",
+      "pageStates": {
+        "@probe/ui-renderer": "active",
+        "@probe/needs-frame": "loading"
+      },
+      "entriesAfterBoot": [
+        {
+          "id": "@probe/ui-renderer",
+          "fiberState": "active"
+        },
+        {
+          "id": "@probe/needs-frame",
+          "fiberState": "pending"
+        }
+      ],
+      "needsFrameAppliedCount": 0
+    }
+  ]
+}

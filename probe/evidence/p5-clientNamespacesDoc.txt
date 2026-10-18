@@ -1,0 +1,11 @@
+# anchor: Client projection of generated Typert Remote descriptors
+# offset: 7
+
+Client projection of generated Typert Remote descriptors. Contributions
+ * install traced `remote.<namespace>` services; no JavaScript Proxy
+ * participates in method lookup, invocation, or type exposure.
+ */
+export type { TypertGatewayFaultDetails } from '../remote-error-codes.ts';
+import type { Context } from '@deepseek-ai/cordis';
+import type { TypertClientRemote, RemoteFailure, RemoteResult } from '@deepseek-ai/dsh-typert-protocol';
+import { RemoteStream, type RemoteS

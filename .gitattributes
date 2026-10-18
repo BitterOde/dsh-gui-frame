@@ -1,0 +1,24 @@
+# ── 行尾纪律：关闭自动 EOL 转换（`-text`＝按原字节进出）────────────────────
+#
+# 为什么这条对本仓是硬需求（不是洁癖）：
+#   `verify/freeze-rev.json` 冻结的是**每个文件的字节数与 sha256**，`verify/freeze-rev.mjs` 与
+#   `node scripts/public-surface.mjs` 都按**字节**比对。本机 git 的系统级配置是 `core.autocrlf=true`，
+#   会在签出时把 LF 换成 CRLF ⇒ 同一份提交下一次签出后**哈希对不上**，
+#   冻结基线与公开面快照会凭空变红，看起来像「有人改了文件」。
+#   交付面文件（`LICENSE` / `README.md` / `lib/client.js` / `guide/**`）尤其经不起这种漂移。
+#
+# 本仓一律 **LF**（现有文件就是 LF）。要改这一条，必须连同冻结基线一起重绑。
+* -text
+
+# 文本类型显式登记（供 diff / 编辑器识别；`eol=lf` 保证签出仍是 LF，字节不变）
+*.mjs     text eol=lf
+*.js      text eol=lf
+*.json    text eol=lf
+*.md      text eol=lf
+*.yml     text eol=lf
+*.html    text eol=lf
+LICENSE   text eol=lf
+
+# 二进制：永不尝试合并 / 不改字节
+*.png     binary
+*.tgz     binary

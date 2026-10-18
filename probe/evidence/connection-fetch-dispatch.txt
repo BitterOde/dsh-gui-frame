@@ -1,0 +1,214 @@
+﻿# file: @deepseek-ai/dsh/node_modules/@deepseek-ai/dsh-client-connection/lib/index.js
+# bytes: 32900  chars: 32890  pattern: /fetchRoutes/g  window: 300/900  maxHits: 6
+
+===== hit 1 @ char 21668 (line 527) match="fetchRoutes" =====
+ATTERN = /^\/[A-Za-z0-9._~-]+$/;
+const ENDPOINT_SEGMENT_PATTERN = /^[A-Za-z0-9_$.-]+$/;
+/** Host Connection service whose channel registrations belong to the caller fiber. */
+var HostConnectionService = class extends Service {
+	trustedHosts;
+	browserAuth;
+	interceptors = /* @__PURE__ */ new Map();
+	fetchRoutes = /* @__PURE__ */ new Map();
+	/**
+	* Provide the Host half over the active HTTP server.
+	* @param ctx - owning Connection plugin context.
+	* @param trustedHosts - deployment authorities accepted by the Host/Origin fence.
+	* @param browserAuth - process token and persistent browser-session owner.
+	*/
+	constructor(ctx, trustedHosts, browserAuth) {
+		super(ctx, "connection");
+		this.trustedHosts = trustedHosts;
+		this.browserAuth = browserAuth;
+	}
+	/** Generic channel registry scoped to the Context reading this service. */
+	get rpc() {
+		const owner = this.ctx;
+		return {
+			handle: (channel, handler) => this.register(owner, channel, handler),
+			intercept: (channel, matches, handler) => this.registerInterceptor(owner, channel, matches, handler)
+		};
+	}
+	/** Exact Fetch-route registry scoped to the Context reading this service. */
+	get fetch() {
+		const owner = this.ctx;
+		return { registe
+
+===== hit 2 @ char 23550 (line 573) match="fetchRoutes" =====
+annel Fetch handler from exact routes and its interceptor.
+	* @param channel - shared channel mounted by Connection.
+	* @returns Fetch handler that selects one owner or returns 404.
+	*/
+	createSharedFetchHandler(channel) {
+		return {
+			requestBodyMode: ({ method, url }) => {
+				const route = this.fetchRoutes.get(url.pathname);
+				return route?.methods.has(method) === true ? route.requestBody : "buffered";
+			},
+			fetch: (request) => {
+				const pathname = new URL(request.url).pathname;
+				const route = this.fetchRoutes.get(pathname);
+				if (route?.methods.has(request.method) === true) return route.fetch(request);
+				const endpoint = endpointFromPath(channel, pathname);
+				const interceptor = this.interceptors.get(channel);
+				if (endpoint === void 0 || interceptor === void 0 || !interceptor.matches(endpoint)) return Promise.resolve(new Response("not found", { status: 404 }));
+				return interceptor.fetchHandler.fetch(request);
+			}
+		};
+	}
+	registerFetchRoute(owner, route) {
+		assertFetchRoute(route);
+		const registered = {
+			methods: new Set(route.methods),
+			requestBody: route.requestBody,
+			fetch: route.fetch
+		};
+		return owner.effect(() => {
+			if (this.fetchRoutes.has(route.
+
+===== hit 3 @ char 23768 (line 578) match="fetchRoutes" =====
+l) {
+		return {
+			requestBodyMode: ({ method, url }) => {
+				const route = this.fetchRoutes.get(url.pathname);
+				return route?.methods.has(method) === true ? route.requestBody : "buffered";
+			},
+			fetch: (request) => {
+				const pathname = new URL(request.url).pathname;
+				const route = this.fetchRoutes.get(pathname);
+				if (route?.methods.has(request.method) === true) return route.fetch(request);
+				const endpoint = endpointFromPath(channel, pathname);
+				const interceptor = this.interceptors.get(channel);
+				if (endpoint === void 0 || interceptor === void 0 || !interceptor.matches(endpoint)) return Promise.resolve(new Response("not found", { status: 404 }));
+				return interceptor.fetchHandler.fetch(request);
+			}
+		};
+	}
+	registerFetchRoute(owner, route) {
+		assertFetchRoute(route);
+		const registered = {
+			methods: new Set(route.methods),
+			requestBody: route.requestBody,
+			fetch: route.fetch
+		};
+		return owner.effect(() => {
+			if (this.fetchRoutes.has(route.path)) throw new Error(`connection: exact Fetch route ${JSON.stringify(route.path)} is already registered`);
+			this.fetchRoutes.set(route.path, registered);
+			return () => {
+				this.fetchRoutes.delete(route.path);
+	
+
+===== hit 4 @ char 24439 (line 595) match="fetchRoutes" =====
+404 }));
+				return interceptor.fetchHandler.fetch(request);
+			}
+		};
+	}
+	registerFetchRoute(owner, route) {
+		assertFetchRoute(route);
+		const registered = {
+			methods: new Set(route.methods),
+			requestBody: route.requestBody,
+			fetch: route.fetch
+		};
+		return owner.effect(() => {
+			if (this.fetchRoutes.has(route.path)) throw new Error(`connection: exact Fetch route ${JSON.stringify(route.path)} is already registered`);
+			this.fetchRoutes.set(route.path, registered);
+			return () => {
+				this.fetchRoutes.delete(route.path);
+			};
+		}, `client-connection: ${route.path} Fetch route`);
+	}
+	register(owner, channel, handler) {
+		assertChannel(channel);
+		const fetchHandler = rpcFetchHandler(channel, handler);
+		const route = {
+			kind: "prefix",
+			path: channel,
+			handler: async (req, res) => {
+				const rejection = this.requestRejection(req);
+				if (rejection !== void 0) {
+					res.writeHead(rejection);
+					res.end(rejection === 401 ? "unauthorized" : "forbidden");
+					return;
+				}
+				await bridge(req, res, fetchHandler);
+			}
+		};
+		return owner.effect(() => owner.webServer.register(route), `client-connection: ${channel} rpc channel`);
+	}
+	registerInterceptor(owner, channel, matc
+
+===== hit 5 @ char 24578 (line 596) match="fetchRoutes" =====
+const registered = {
+			methods: new Set(route.methods),
+			requestBody: route.requestBody,
+			fetch: route.fetch
+		};
+		return owner.effect(() => {
+			if (this.fetchRoutes.has(route.path)) throw new Error(`connection: exact Fetch route ${JSON.stringify(route.path)} is already registered`);
+			this.fetchRoutes.set(route.path, registered);
+			return () => {
+				this.fetchRoutes.delete(route.path);
+			};
+		}, `client-connection: ${route.path} Fetch route`);
+	}
+	register(owner, channel, handler) {
+		assertChannel(channel);
+		const fetchHandler = rpcFetchHandler(channel, handler);
+		const route = {
+			kind: "prefix",
+			path: channel,
+			handler: async (req, res) => {
+				const rejection = this.requestRejection(req);
+				if (rejection !== void 0) {
+					res.writeHead(rejection);
+					res.end(rejection === 401 ? "unauthorized" : "forbidden");
+					return;
+				}
+				await bridge(req, res, fetchHandler);
+			}
+		};
+		return owner.effect(() => owner.webServer.register(route), `client-connection: ${channel} rpc channel`);
+	}
+	registerInterceptor(owner, channel, matches, handler) {
+		if (channel !== "/api") throw new Error(`connection: invalid shared RPC channel ${JSON.stringify(channel)}`);
+		const int
+
+===== hit 6 @ char 24646 (line 598) match="fetchRoutes" =====
+ody: route.requestBody,
+			fetch: route.fetch
+		};
+		return owner.effect(() => {
+			if (this.fetchRoutes.has(route.path)) throw new Error(`connection: exact Fetch route ${JSON.stringify(route.path)} is already registered`);
+			this.fetchRoutes.set(route.path, registered);
+			return () => {
+				this.fetchRoutes.delete(route.path);
+			};
+		}, `client-connection: ${route.path} Fetch route`);
+	}
+	register(owner, channel, handler) {
+		assertChannel(channel);
+		const fetchHandler = rpcFetchHandler(channel, handler);
+		const route = {
+			kind: "prefix",
+			path: channel,
+			handler: async (req, res) => {
+				const rejection = this.requestRejection(req);
+				if (rejection !== void 0) {
+					res.writeHead(rejection);
+					res.end(rejection === 401 ? "unauthorized" : "forbidden");
+					return;
+				}
+				await bridge(req, res, fetchHandler);
+			}
+		};
+		return owner.effect(() => owner.webServer.register(route), `client-connection: ${channel} rpc channel`);
+	}
+	registerInterceptor(owner, channel, matches, handler) {
+		if (channel !== "/api") throw new Error(`connection: invalid shared RPC channel ${JSON.stringify(channel)}`);
+		const interceptor = {
+			matches,
+			fetchHandler: rpcFetchHandler(channel, h
+
+# total hits shown: 6 (capped)

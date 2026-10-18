@@ -1,0 +1,131 @@
+{
+  "platform": {
+    "dshVersion": "0.2.0-rc.2",
+    "cordis": "~4.0.4",
+    "install": "<dsh-install>"
+  },
+  "question": "GUIFrame 卸载后，已 inject 的插件是重新挂载 / 回 pending / 被卸载？",
+  "transitions": [
+    "@probe/frame: loading (uid=3)",
+    "@probe/frame: active (uid=3)",
+    "@probe/consumer: loading (uid=4)",
+    "@probe/consumer: active (uid=4)",
+    "@probe/getter: loading (uid=5)",
+    "@probe/getter: active (uid=5)",
+    "@probe/frame: unloading (uid=null)",
+    "@probe/consumer: unloading (uid=4)",
+    "@probe/consumer: pending (uid=4)",
+    "@probe/frame: loading (uid=6)",
+    "@probe/frame: active (uid=6)",
+    "@probe/consumer: loading (uid=4)",
+    "@probe/consumer: active (uid=4)",
+    "@probe/frame: disposed (uid=null)"
+  ],
+  "timeline": [
+    {
+      "label": "① 三条入口都装好",
+      "entries": [
+        {
+          "id": "@probe/frame",
+          "fiberState": "active",
+          "fiberUid": 3
+        },
+        {
+          "id": "@probe/consumer",
+          "fiberState": "active",
+          "fiberUid": 4
+        },
+        {
+          "id": "@probe/getter",
+          "fiberState": "active",
+          "fiberUid": 5
+        }
+      ],
+      "serviceGuiFrame": true,
+      "counters": {
+        "frameApplies": 1,
+        "frameUnloads": 0,
+        "frameEffectsAlive": 1,
+        "consumerApplies": 1,
+        "consumerUnloads": 0,
+        "consumerEffectsAlive": 1,
+        "consumerSawService": [
+          true
+        ],
+        "getterApplies": 1,
+        "getterUnloads": 0,
+        "getterLastLookup": true,
+        "getterLookups": []
+      }
+    },
+    {
+      "label": "② 卸载 GUIFrame 后（同一 tick 观察）",
+      "entries": [
+        {
+          "id": "@probe/consumer",
+          "fiberState": "pending",
+          "fiberUid": 4
+        },
+        {
+          "id": "@probe/getter",
+          "fiberState": "active",
+          "fiberUid": 5
+        }
+      ],
+      "serviceGuiFrame": false,
+      "counters": {
+        "frameApplies": 1,
+        "frameUnloads": 1,
+        "frameEffectsAlive": 0,
+        "consumerApplies": 1,
+        "consumerUnloads": 1,
+        "consumerEffectsAlive": 0,
+        "consumerSawService": [
+          true
+        ],
+        "getterApplies": 1,
+        "getterUnloads": 0,
+        "getterLastLookup": true,
+        "getterLookups": []
+      }
+    },
+    {
+      "label": "③ GUIFrame 装回来之后",
+      "entries": [
+        {
+          "id": "@probe/consumer",
+          "fiberState": "active",
+          "fiberUid": 4
+        },
+        {
+          "id": "@probe/getter",
+          "fiberState": "active",
+          "fiberUid": 5
+        },
+        {
+          "id": "@probe/frame",
+          "fiberState": "active",
+          "fiberUid": 6
+        }
+      ],
+      "serviceGuiFrame": true,
+      "counters": {
+        "frameApplies": 2,
+        "frameUnloads": 1,
+        "frameEffectsAlive": 1,
+        "consumerApplies": 2,
+        "consumerUnloads": 1,
+        "consumerEffectsAlive": 1,
+        "consumerSawService": [
+          true,
+          true
+        ],
+        "getterApplies": 1,
+        "getterUnloads": 0,
+        "getterLastLookup": true,
+        "getterLookups": []
+      }
+    }
+  ],
+  "reloadedEntryIdSameAsBefore": true
+}

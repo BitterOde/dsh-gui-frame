@@ -1,0 +1,30 @@
+﻿# file: @deepseek-ai/dsh/node_modules/@deepseek-ai/dsh-client-connection/lib/index.js chars: 32890 slice: [24200, 25100)
+			}
+		};
+	}
+	registerFetchRoute(owner, route) {
+		assertFetchRoute(route);
+		const registered = {
+			methods: new Set(route.methods),
+			requestBody: route.requestBody,
+			fetch: route.fetch
+		};
+		return owner.effect(() => {
+			if (this.fetchRoutes.has(route.path)) throw new Error(`connection: exact Fetch route ${JSON.stringify(route.path)} is already registered`);
+			this.fetchRoutes.set(route.path, registered);
+			return () => {
+				this.fetchRoutes.delete(route.path);
+			};
+		}, `client-connection: ${route.path} Fetch route`);
+	}
+	register(owner, channel, handler) {
+		assertChannel(channel);
+		const fetchHandler = rpcFetchHandler(channel, handler);
+		const route = {
+			kind: "prefix",
+			path: channel,
+			handler: async (req, res) => {
+				const rejection = this.requestRejection(req);
+				if (rejection !== void 0) {
+					res.writeHead(rejection);
+					res.end(rejection === 401 ? "un

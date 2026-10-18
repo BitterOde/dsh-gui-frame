@@ -1,0 +1,42 @@
+﻿# file: @deepseek-ai/dsh/node_modules/@deepseek-ai/cordis/lib/index.js
+# bytes: 60378  chars: 60228  pattern: /bufferSize = 1e3/g  window: 100/900  maxHits: 1
+
+===== hit 1 @ char 18640 (line 583) match="bufferSize = 1e3" =====
+ directly to log with the current fiber-derived name.
+*/
+var LoggerService = class LoggerService {
+	bufferSize = 1e3;
+	buffer = [];
+	ctx;
+	_snMessage = 0;
+	_snExporter = 0;
+	exporters = /* @__PURE__ */ new Map();
+	constructor(ctx) {
+		const tracker = {
+			property: "ctx",
+			noShadow: true
+		};
+		const self = createCallable("logger", joinPrototype(Object.getPrototypeOf(this), Function.prototype), tracker);
+		Object.assign(self, this);
+		self.ctx = ctx;
+		defineProperty(self, symbols.tracker, tracker);
+		self.exporter({
+			colors: 3,
+			export: (message) => {
+				self.buffer.push(message);
+				if (self.buffer.length > self.bufferSize) self.buffer = self.buffer.slice(-self.bufferSize);
+			}
+		});
+		return self;
+	}
+	/**
+	* Register an exporter and dispose it with the current fiber.
+	*
+	* @param exporter — the sink that receives structured log messages.
+	* @returns a disposer that removes the exporter.
+	*/
+	exporter(exporter) {
+		return this.ctx.effect(() => {
+			this.exporters.set(++this._snExporter, exp
+
+# total hits shown: 1 (capped)

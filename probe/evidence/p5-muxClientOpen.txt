@@ -1,0 +1,21 @@
+# anchor: open(endpoint: string
+# offset: 1642
+
+iately. */
+    reconnect(): void;
+    /**
+     * Open one logical stream on the persistent physical connection.
+     * If no physical attempt is active, opening waits for Connection to request
+     * one or for the signal to abort.
+     * @param endpoint - Typert Remote stream endpoint.
+     * @param payload - endpoint request encoded on the wire.
+     * @param signal - cancellation for this logical stream.
+     * @param uplink - the Client's items: each is sent as an `item` frame, its end as `end`; its `return()`
+     * runs when the stream finishes, and its failure cancels the stream and fails the downlink.
+     * @returns Host items until completion, cancellation, or failure.
+     */
+    open(endpoint: string, payload: unknown, signal: AbortSignal, uplink?: AsyncIterable<unknown>): AsyncGenerator;
+    /**
+     * Send the caller's uplink items on this generation's socket. `stop()`
+     * interrupts a pump blocked on `uplink.next()` and releases the iterator: a
+     * handle's queue closes at once, so `se

@@ -1,0 +1,30 @@
+{
+  "markers": {
+    "MARK_LOG": "[gui-frame] logger-marker-P2",
+    "MARK_ERR": "[gui-frame] 客户端失败 stderr-marker-P2"
+  },
+  "findings": {
+    "pipe": {
+      "exitCode": 0,
+      "childStdout": "P2-CHILD {\"exporters\":1,\"bufferLen\":2,\"bufferTypes\":[\"error:0\",\"info:1\"],\"errorHitsBuffer\":true,\"infoHitsBuffer\":true,\"warnHitsBuffer\":false,\"debugHitsBuffer\":false,\"loggerLevel\":null,\"loggerName\":\"root\"}\n",
+      "childStderr": "[gui-frame] 客户端失败 stderr-marker-P2\n",
+      "loggerMarkerOnStdout": false,
+      "loggerMarkerOnStderr": false,
+      "stderrMarkerOnStderr": true,
+      "stderrMarkerOnStdout": false
+    },
+    "inherit": {
+      "exitCode": 0,
+      "note": "子进程 stderr 直落本探针进程 stderr，见本次命令输出里的哨兵行"
+    }
+  },
+  "assertions": {
+    "A1 子进程 logger 写的哨兵没出现在 stdout": true,
+    "A2 子进程 logger 写的哨兵没出现在 stderr": true,
+    "A3 默认配置下 logger.error 进内存 buffer": true,
+    "A4 默认配置下 logger.warn 连内存 buffer 都进不去": true,
+    "A5 默认配置下 logger.debug 连内存 buffer 都进不去": true,
+    "B1 process.stderr.write 的哨兵出现在 stderr 管道": true,
+    "B2 该哨兵不串到 stdout": true
+  }
+}

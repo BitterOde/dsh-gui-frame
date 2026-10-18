@@ -1,0 +1,22 @@
+# anchor: const namespaces = new Set([...direct.keys(), ...scoped.keys()])
+# offset: 62914
+
+= /* @__PURE__ */ new Map();
+				const scoped = /* @__PURE__ */ new Map();
+				const add = (table, descriptor, kind) => {
+					const methods = table.get(descriptor.namespace) ?? /* @__PURE__ */ new Set();
+					if (methods.has(descriptor.method)) throw new Error(`client api: contribution repeats ${kind} method ${endpointOf(descriptor)}`);
+					methods.add(descriptor.method);
+					table.set(descriptor.namespace, methods);
+					if ((this.namespaces.get(descriptor.namespace)?.service)?.has(kind, descriptor.method) === true) throw new Error(`client api: ${kind} method ${endpointOf(descriptor)} is already mounted`);
+				};
+				for (const descriptor of contribution.descriptors) {
+					requireStrictInputs(descriptor);
+					if (descriptor.invocation.kind === "direct") add(direct, descriptor, "direct");
+					if (scopedProjection(descriptor) !== void 0) add(scoped, descriptor, "scoped");
+				}
+				const namespaces = new Set([...direct.keys(), ...scoped.keys()]);
+				for (const namespace of namespaces) {
+					const service = this.namespaces.get(namespace)?.service;
+					if (service === void 0) {
+						if (namespace in this) throw new Error(`client api: names

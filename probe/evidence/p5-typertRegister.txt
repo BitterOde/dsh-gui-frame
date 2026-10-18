@@ -1,0 +1,13 @@
+# anchor: register(contribution: TypertContribution)
+# offset: 541
+
+ecord, TypertSchemaFilter, TypertSchemaRecord } from './types.ts';
+export { default, TypertRegistry, typertEndpoint, typertKey, typertPackageKey } from './service.ts';
+export type * from './types.ts';
+declare module '@deepseek-ai/dsh-typert-protocol' {
+    interface TypertRegistryContract {
+        register(contribution: TypertContribution): TypertDisposer;
+        get(key: string): TypertSchemaRecord | undefined;
+        resolve(key: string): TypertSchemaRecord;
+        list(filter?: TypertSchemaFilter): TypertSchemaRecord[];
+        g

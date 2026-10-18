@@ -1,0 +1,7 @@
+{
+  "tests.total": 299,
+  "tests.pass": 299,
+  "selftest": null,
+  "generatedAt": "2026-10-14T13:36:00.000Z",
+  "note": "跑者自报：`tests.*` 来自 `npm test` 的本树实测（299/299/0）。`selftest` 留 null —— 判据条数的真源是各命令自己的收尾输出，这里不再抄一份会漂的副本。"
+}

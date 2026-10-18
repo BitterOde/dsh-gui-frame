@@ -1,0 +1,17 @@
+# anchor: Worker-local Gateway stream carrier
+# offset: 2768
+
+portHooks {
+    /**
+     * Already decoded logical RPC carrier. When present it replaces the HTTP
+     * caller outright: no envelopes, no `fetch`, no `openStream` (an in-process
+     * Host such as a test mock plugs in here).
+     */
+    rpc?: ClientConnectionRpc;
+    /** Transport for generic unary RPC channels (the Typert gateway); unused when `rpc` is present. */
+    fetch?: RpcFetch;
+    /** Worker-local Gateway stream carrier; absent when the page uses the Gateway WebSocket or `rpc` is present. */
+    openStream?: RpcStreamOpen;
+    /**
+     * Bundle transport for the module system, present when the carrier also owns
+    

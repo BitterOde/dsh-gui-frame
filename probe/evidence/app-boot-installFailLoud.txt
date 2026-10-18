@@ -1,0 +1,58 @@
+﻿# file: @deepseek-ai/dsh/node_modules/@deepseek-ai/dsh-app-boot/lib/index.js
+# bytes: 69668  chars: 69644  pattern: /function installFailLoud/g  window: 100/1800  maxHits: 1
+
+===== hit 1 @ char 60356 (line 1401) match="function installFailLoud" =====
+al exit already owns the outcome.
+* @returns the uninstaller that removes the rejection handler.
+*/
+function installFailLoud(binName, proc = process, release) {
+	let exiting = false;
+	const handler = (err) => {
+		if (assembledActivationRejections.has(err)) return;
+		if (exiting) return;
+		exiting = true;
+		proc.stderr.write(`${binName}: fatal load failure: ${err instanceof Error ? err.stack ?? err.message : String(err)}\n`);
+		if (release === void 0) {
+			proc.exit(1);
+			return;
+		}
+		(async () => {
+			let timer;
+			try {
+				await Promise.race([(async () => release())(), new Promise((resolve) => {
+					timer = setTimeout(resolve, FAIL_LOUD_RELEASE_TIMEOUT_MS);
+				})]);
+			} catch {}
+			clearTimeout(timer);
+			proc.exit(1);
+		})();
+	};
+	const uninstall = () => void proc.off("unhandledRejection", handler);
+	proc.on("unhandledRejection", handler);
+	return uninstall;
+}
+/**
+* After the tree settles, reject entries with no fiber and name every plugin
+* whose module failed to resolve. Disabled entries are the only valid
+* fiber-less state.
+* @param ctx - the settled context whose loader entries to audit.
+* @param binName - the diagnostic prefix on the thrown error.
+*/
+function assertEntriesLoaded(ctx, binName) {
+	const failed = [...ctx.loader.entries()].filter((entry) => entry.fiber === void 0 && !entry.disabled);
+	if (failed.length > 0) {
+		const names = failed.map((entry) => entry.options.name).join(", ");
+		throw new Error(`${binName}: plugin(s) failed to load: ${names}; Cordis startup failed because these plugin(s) could not be resolved (see the error(s) logged above)`);
+	}
+}
+/**
+* Value mirrors used because Cordis's const enum has no runtime object to import.
+* Keep aligned with `packages/extensions/tool-cordis/src/fiber-state.ts` and
+* `packages/client/web/src/loader-status.ts`.
+*/
+const FIBER_PENDING = 0;
+const FIBER_ACTIVE = 2;
+const FIBER_FAILED = 3;
+/** Render a thrown plugin value wit
+
+# total hits shown: 1 (capped)

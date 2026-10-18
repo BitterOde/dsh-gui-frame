@@ -1,0 +1,15 @@
+﻿# file: @deepseek-ai/dsh/node_modules/@deepseek-ai/cordis-plugin-loader/lib/index.js chars: 25695 slice: [6360, 6800)
+k || entry.fiber?.inertia).filter(isNonNullable);
+	}
+	/**
+	* Wait until this tree has no active import or lifecycle tasks.
+	* @throws a settled fiber failure, or an aggregate when several fibers failed.
+	*/
+	async await() {
+		while (true) {
+			const tasks = this.getTasks();
+			if (tasks.length) {
+				await Promise.allSettled(tasks);
+				continue;
+			}
+			const failures = (await Promise.allSettled([...this.entries()].map((entry) => entry

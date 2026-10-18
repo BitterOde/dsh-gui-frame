@@ -1,0 +1,42 @@
+﻿# file: @deepseek-ai/dsh/node_modules/@deepseek-ai/cordis/lib/index.js
+# bytes: 60378  chars: 60228  pattern: /exporter\.levels\?\.default/g  window: 300/400  maxHits: 1
+
+===== hit 1 @ char 17586 (line 474) match="exporter.levels?.default" =====
+use);
+				else if (isAggregateError(args[0])) {
+					args[0].errors.forEach((error) => this[type](error));
+					return;
+				}
+			}
+			const sn = ++this.service._snMessage;
+			const ts = Date.now();
+			for (const exporter of this.service.exporters.values()) {
+				if ((exporter.levels?.[this.name] ?? exporter.levels?.default ?? this.level ?? 1) < level) continue;
+				const message = {
+					sn,
+					ts,
+					type,
+					level,
+					name: this.name,
+					...this.meta,
+					args
+				};
+				exporter.export(message);
+			}
+		};
+	}
+};
+/** ANSI 16-color palette indexes used for logger name coloring. */
+const c16 = [
+	6,
+	2,
+	3,
+	4,
+	5,
+	1
+];
+/** ANSI 256-color palette indexes used for logger name coloring. */
+const c256 = [
+	
+
+# total hits shown: 1 (capped)

@@ -1,0 +1,6 @@
+# anchor: export type RemoteStreamOpener
+# offset: 559
+
+export type RemoteStreamOpener = (endpoint: string, payload: unknown, uplink: AsyncIterable<unknown>, peer: PeerScope, control: AbortController) => Promise<AsyncIterable<unknown>>;
+/** Convert an invocation or carrier failure to a stable wire value. */
+export type RemoteStreamFailureMapper
